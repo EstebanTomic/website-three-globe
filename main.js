@@ -98,7 +98,7 @@ function convertLatLngToCartesian(p) {
 
 
 let pointMesh = new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.1,20,20),
+    new THREE.SphereBufferGeometry(0.05,20,20),
     new THREE.MeshBasicMaterial({color: 0xff0000})
 )
 
