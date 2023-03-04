@@ -35,7 +35,7 @@ const sphere = new THREE.Mesh(
         fragmentShader,
         uniforms:{
             globeTexture: {
-                value: new THREE.TextureLoader().load('./img/globe.jpg')
+                value: new THREE.TextureLoader().load('./img/globe4k.jpg')
             }
         }
     })
@@ -149,7 +149,7 @@ scene.add(pointMesh);
 const controls = new OrbitControls( camera, renderer.domElement );
 // controls.maxPolarAngle = Math.PI * 0.495;
 // controls.target.set( 0, 10, 0 );
-controls.minDistance = 10.0;
+controls.minDistance = 2.0;
 controls.maxDistance = 2000.0;
 controls.update();
 
