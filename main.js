@@ -5,7 +5,8 @@ import fragmentShader from './shaders/fragment.glsl'
 
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl'
 import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl'
-import {Float16BufferAttribute} from "three";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
 
 console.log(vertexShader);
 
@@ -78,6 +79,81 @@ starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVerti
 const stars = new THREE.Points(starGeometry, starMaterial)
 scene.add(stars)
 
+
+// Locacion
+function convertLatLngToCartesian(p) {
+
+    let lat = (90 - p.lat) * (Math.PI/180);
+    let lng = (p.lng +180) * (Math.PI/180);
+    let radius = 5;
+
+    let x = -(radius * Math.sin(lat)*Math.cos(lng));
+    let y = (radius * Math.sin(lat)*Math.sin(lng));
+    let z = (radius * Math.cos(lat));
+
+    return {
+        x,y,z
+    }
+}
+
+
+let pointMesh = new THREE.Mesh(
+    new THREE.SphereBufferGeometry(0.1,20,20),
+    new THREE.MeshBasicMaterial({color: 0xff0000})
+)
+
+//
+let mazunte = {
+    lat: 15.6677,
+    lng: 96.5545
+}
+
+let pichilemu = {
+    lat: 52.3919,
+    lng: 63.5545
+}
+
+let losAngeles = {
+    lat: 34.0522,
+    lng: -120.2437
+}
+
+
+
+let nyork = {
+    lat: 51.0522,
+    lng: -70.2437
+}
+
+
+let lima = {
+    lat: -12.04318,
+    lng: 77.02824
+}
+
+//let lat = -12.04318 * Math.PI/180;
+//let lng = -77.02824 * Math.PI/180;
+
+//let lat = 34.0522 * Math.PI/180;
+//let lng = 118.2437 * Math.PI/180;
+
+
+let pos = convertLatLngToCartesian(pichilemu);
+console.log(pos);
+
+pointMesh.position.set(pos.x, pos.y, pos.z)
+
+scene.add(pointMesh);
+
+//Controls
+const controls = new OrbitControls( camera, renderer.domElement );
+// controls.maxPolarAngle = Math.PI * 0.495;
+// controls.target.set( 0, 10, 0 );
+controls.minDistance = 10.0;
+controls.maxDistance = 2000.0;
+controls.update();
+
+
 const mouse = {
     x: undefined,
     y: undefined
@@ -86,12 +162,12 @@ const mouse = {
 function animate() {
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
-    sphere.rotation.y += 0.003
-    gsap.to(group.rotation,{
-        x: -mouse.y * 0.3,
-        y: mouse.x * 0.5,
-        duration: 1.5
-    })
+ //   sphere.rotation.y += 0.003
+ //   gsap.to(group.rotation,{
+ //       x: -mouse.y * 0.3,
+ //       y: mouse.x * 0.5,
+ //       duration: 1.5
+ //   })
 }
 
 animate()
