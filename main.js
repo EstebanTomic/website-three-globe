@@ -10,6 +10,25 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 console.log(vertexShader);
 
+
+// Loading Manager
+THREE.DefaultLoadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+    console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
+THREE.DefaultLoadingManager.onLoad = function ( ) {
+    console.log( 'Loading Complete!');
+};
+
+THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+    console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
+THREE.DefaultLoadingManager.onError = function ( url ) {
+    console.log( 'There was an error loading ' + url );
+};
+
+
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -18,74 +37,12 @@ const camera = new THREE.PerspectiveCamera(
     1000
 )
 
-const renderer = new THREE.WebGLRenderer(
-    {
-        antialias: true
-    }
-)
-renderer.setSize(innerWidth, innerHeight)
-renderer.setPixelRatio(window.devicePixelRatio)
-document.body.appendChild(renderer.domElement)
-
-// Sphere
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 50, 50),
-    new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms:{
-            globeTexture: {
-                value: new THREE.TextureLoader().load('./img/globe4k.jpg')
-            }
-        }
-    })
-)
-
-// Atmosphere
-const atmosphere = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 50, 50),
-    new THREE.ShaderMaterial({
-        vertexShader: atmosphereVertexShader,
-        fragmentShader: atmosphereFragmentShader,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide
-    })
-)
-
-atmosphere.scale.set(1.1, 1.1, 1.1)
-
-scene.add(atmosphere)
-camera.position.z = 15
-
-const group = new THREE.Group()
-group.add(sphere)
-scene.add(group)
-
-const starGeometry = new THREE.BufferGeometry()
-const starMaterial = new THREE.PointsMaterial({
-    color: 0xffffff
-})
-
-const starVertices = []
-for (let i = 0; i < 10000; i++) {
-    const x = (Math.random() - 0.5) * 2000
-    const y = (Math.random() - 0.5) * 2000
-    const z = -Math.random() * 2000
-    starVertices.push(x, y, z)
-}
-console.log(starVertices);
-
-starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3))
-const stars = new THREE.Points(starGeometry, starMaterial)
-scene.add(stars)
-
-
 // Locacion
 function convertLatLngToCartesian(p) {
 
     let lat = (90 - p.lat) * (Math.PI/180);
     let lng = (p.lng +180) * (Math.PI/180);
-    let radius = 5;
+    let radius = 50;
 
     let x = -(radius * Math.sin(lat)*Math.cos(lng));
     let y = (radius * Math.sin(lat)*Math.sin(lng));
@@ -98,7 +55,7 @@ function convertLatLngToCartesian(p) {
 
 
 let pointMesh = new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.05,20,20),
+    new THREE.SphereBufferGeometry(0.3,20,20),
     new THREE.MeshBasicMaterial({color: 0xff0000})
 )
 
@@ -143,7 +100,70 @@ console.log(pos);
 
 pointMesh.position.set(pos.x, pos.y, pos.z)
 
-scene.add(pointMesh);
+
+const renderer = new THREE.WebGLRenderer(
+    {
+        antialias: true
+    }
+)
+renderer.setSize(innerWidth, innerHeight)
+renderer.setPixelRatio(window.devicePixelRatio)
+document.body.appendChild(renderer.domElement)
+
+// Sphere
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(50, 50, 50),
+    new THREE.ShaderMaterial({
+        vertexShader,
+        fragmentShader,
+        uniforms:{
+            globeTexture: {
+                value: new THREE.TextureLoader().load('./img/globe4k.jpg')
+            }
+        }
+    })
+)
+
+// Atmosphere
+const atmosphere = new THREE.Mesh(
+    new THREE.SphereGeometry(54, 50, 50),
+    new THREE.ShaderMaterial({
+        vertexShader: atmosphereVertexShader,
+        fragmentShader: atmosphereFragmentShader,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide
+    })
+)
+
+atmosphere.scale.set(1.1, 1.1, 1.1)
+
+camera.position.z = 15
+
+const starVertices = []
+for (let i = 0; i < 10000; i++) {
+    const x = (Math.random() - 0.5) * 2000
+    const y = (Math.random() - 0.5) * 2000
+    const z = -Math.random() * 2000
+    starVertices.push(x, y, z)
+}
+
+const starGeometry = new THREE.BufferGeometry()
+const starMaterial = new THREE.PointsMaterial({
+    color: 0xffffff
+})
+starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3))
+const stars = new THREE.Points(starGeometry, starMaterial)
+
+
+
+const group = new THREE.Group()
+group.add(sphere)
+group.add(atmosphere)
+group.add(pointMesh)
+group.add(stars)
+scene.add(group)
+
+
 
 //Controls
 const controls = new OrbitControls( camera, renderer.domElement );
@@ -162,12 +182,11 @@ const mouse = {
 function animate() {
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
- //   sphere.rotation.y += 0.003
- //   gsap.to(group.rotation,{
- //       x: -mouse.y * 0.3,
- //       y: mouse.x * 0.5,
- //       duration: 1.5
- //   })
+  gsap.to(group.rotation,{
+      x: -mouse.y * 0.3,
+      y: mouse.x * 0.5,
+      duration: 1.5
+  })
 }
 
 animate()
