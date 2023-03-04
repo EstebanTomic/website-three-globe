@@ -1,3 +1,4 @@
+import gsap from 'gsap';
 import * as THREE from 'three'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
@@ -37,7 +38,6 @@ const sphere = new THREE.Mesh(
         }
     })
 )
-scene.add(sphere)
 
 // Atmosphere
 const atmosphere = new THREE.Mesh(
@@ -55,11 +55,31 @@ atmosphere.scale.set(1.1, 1.1, 1.1)
 scene.add(atmosphere)
 camera.position.z = 15
 
+const group = new THREE.Group()
+group.add(sphere)
+scene.add(group)
+
+const mouse = {
+    x: undefined,
+    y: undefined
+}
 
 function animate() {
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
-    sphere.rotation.y += 0.001
+    sphere.rotation.y += 0.003
+    gsap.to(group.rotation,{
+        x: -mouse.y * 0.3,
+        y: mouse.x * 0.5,
+        duration: 1.5
+    })
 }
 
 animate()
+
+
+addEventListener('mousemove', () => {
+    mouse.x = (event.clientX / innerWidth) * 2 - 1
+    mouse.y = -(event.clientY / innerHeight) * 2 + 1
+    console.log(mouse);
+})
