@@ -169,10 +169,10 @@ atmosphere.scale.set(1.1, 1.1, 1.1)
 
 // Stars
 const starVertices = []
-for (let i = 0; i < 20000; i++) {
-    const x = (Math.random() - 0.5) * 60000
-    const y = (Math.random() - 0.5) * 60000
-    const z = -Math.random() * 60000
+for (let i = 0; i < 15000; i++) {
+    const x = (Math.random() - 0.5) * 20000
+    const y = (Math.random() - 0.5) * 20000
+    const z = -Math.random() * 20000
     starVertices.push(x, y, z)
 }
 const starGeometry = new THREE.BufferGeometry()
@@ -227,12 +227,12 @@ pointMesh.position.set(pos.x, pos.y, pos.z)
 
 // Earth
 const group = new THREE.Group()
+
 group.add(sphere)
 group.add(atmosphere)
 group.add(pointMesh)
 group.add(stars)
 scene.add(group)
-
 // Controls
 //const controls = new OrbitControls( camera, renderer.domElement );
 //// controls.maxPolarAngle = Math.PI * 0.495;
@@ -247,6 +247,7 @@ const mouse = {
 }
 
 function animate() {
+
     // Animacion LLuvia
     rainVariation()
     cloudParticles.forEach(p => {
@@ -266,18 +267,31 @@ function animate() {
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
 
-    const timeline = new gsap.timeline();
-    timeline.from(camera.position,
-        { y: -20, duration: 8 },
-        "<")
-        .to(camera.position,{
-            z: 1500,
-            duration: 0.5
-        },'start')
-        .to(camera.rotation,{
-            x: -0.1,
-            duration: 3
-        },'start');
+    //gsap.to(group.rotation, {
+    //    x: -mouse.y * 0.3,
+    //    y: mouse.x * 0.3,
+    //    duration: 2
+    //})
+
+
+    console.log('camera.position:::',camera.position)
+    console.log('camera.rotation:::',camera.rotation)
+   const timeline = new gsap.timeline();
+
+   timeline.from(camera.position, { y: -20, duration: 2 }, "<")
+     .to(camera.position,{
+         x: 455,
+         y: -305,
+         z: 1220,
+         duration: 2
+     },'start')
+     .to(camera.rotation,{
+         x: 0.20,
+         y: 0.50,
+         z: 0.16,
+         duration: 2
+     },'start');
+
 
 }
 
@@ -286,5 +300,5 @@ animate()
 addEventListener('mousemove', () => {
     mouse.x = (event.clientX / innerWidth) * 2 - 1
     mouse.y = -(event.clientY / innerHeight) * 2 + 1
-   // console.log(mouse);
+    console.log(mouse);
 })
