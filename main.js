@@ -37,68 +37,6 @@ const camera = new THREE.PerspectiveCamera(
     1000
 )
 
-// Locacion
-function convertLatLngToCartesian(p) {
-
-    let lat = (90 - p.lat) * (Math.PI/180);
-    let lng = (p.lng +180) * (Math.PI/180);
-    let radius = 50;
-
-    let x = -(radius * Math.sin(lat)*Math.cos(lng));
-    let y = (radius * Math.sin(lat)*Math.sin(lng));
-    let z = (radius * Math.cos(lat));
-
-    return {
-        x,y,z
-    }
-}
-
-
-let pointMesh = new THREE.Mesh(
-    new THREE.SphereBufferGeometry(0.3,20,20),
-    new THREE.MeshBasicMaterial({color: 0xff0000})
-)
-
-//
-let mazunte = {
-    lat: 15.6677,
-    lng: 96.5545
-}
-
-let pichilemu = {
-    lat: 52.3919,
-    lng: 63.5545
-}
-
-let losAngeles = {
-    lat: 34.0522,
-    lng: -120.2437
-}
-
-
-
-let nyork = {
-    lat: 51.0522,
-    lng: -70.2437
-}
-
-
-let lima = {
-    lat: -12.04318,
-    lng: 77.02824
-}
-
-//let lat = -12.04318 * Math.PI/180;
-//let lng = -77.02824 * Math.PI/180;
-
-//let lat = 34.0522 * Math.PI/180;
-//let lng = 118.2437 * Math.PI/180;
-
-
-let pos = convertLatLngToCartesian(pichilemu);
-console.log(pos);
-
-pointMesh.position.set(pos.x, pos.y, pos.z)
 
 
 const renderer = new THREE.WebGLRenderer(
@@ -134,11 +72,10 @@ const atmosphere = new THREE.Mesh(
         side: THREE.BackSide
     })
 )
-
 atmosphere.scale.set(1.1, 1.1, 1.1)
-
 camera.position.z = 15
 
+// Stars
 const starVertices = []
 for (let i = 0; i < 10000; i++) {
     const x = (Math.random() - 0.5) * 2000
@@ -146,7 +83,6 @@ for (let i = 0; i < 10000; i++) {
     const z = -Math.random() * 2000
     starVertices.push(x, y, z)
 }
-
 const starGeometry = new THREE.BufferGeometry()
 const starMaterial = new THREE.PointsMaterial({
     color: 0xffffff
@@ -154,8 +90,50 @@ const starMaterial = new THREE.PointsMaterial({
 starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3))
 const stars = new THREE.Points(starGeometry, starMaterial)
 
+// Locacion
+function convertLatLngToCartesian(p) {
+    let lat = (90 - p.lat) * (Math.PI/180);
+    let lng = (p.lng +180) * (Math.PI/180);
+    let radius = 50;
 
+    let x = -(radius * Math.sin(lat)*Math.cos(lng));
+    let y = (radius * Math.sin(lat)*Math.sin(lng));
+    let z = (radius * Math.cos(lat));
 
+    return {
+        x,y,z
+    }
+}
+let pointMesh = new THREE.Mesh(
+    new THREE.SphereBufferGeometry(0.3,20,20),
+    new THREE.MeshBasicMaterial({color: 0xff0000})
+)
+let mazunte = {
+    lat: 15.6677,
+    lng: 96.5545
+}
+let pichilemu = {
+    lat: 52.3919,
+    lng: 63.5545
+}
+let losAngeles = {
+    lat: 34.0522,
+    lng: -120.2437
+}
+let nyork = {
+    lat: 51.0522,
+    lng: -70.2437
+}
+let lima = {
+    lat: -12.04318,
+    lng: 77.02824
+}
+
+let pos = convertLatLngToCartesian(pichilemu);
+console.log(pos);
+pointMesh.position.set(pos.x, pos.y, pos.z)
+
+// Earth
 const group = new THREE.Group()
 group.add(sphere)
 group.add(atmosphere)
@@ -163,16 +141,13 @@ group.add(pointMesh)
 group.add(stars)
 scene.add(group)
 
-
-
-//Controls
+// Controls
 const controls = new OrbitControls( camera, renderer.domElement );
 // controls.maxPolarAngle = Math.PI * 0.495;
 // controls.target.set( 0, 10, 0 );
 controls.minDistance = 2.0;
 controls.maxDistance = 2000.0;
 controls.update();
-
 
 const mouse = {
     x: undefined,
@@ -190,7 +165,6 @@ function animate() {
 }
 
 animate()
-
 
 addEventListener('mousemove', () => {
     mouse.x = (event.clientX / innerWidth) * 2 - 1
