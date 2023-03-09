@@ -16,12 +16,18 @@ THREE.DefaultLoadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) 
     console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
 
-THREE.DefaultLoadingManager.onLoad = function ( ) {
-    console.log( 'Loading Complete!');
+
+
+const progressBar = document.getElementById('progress-bar');
+THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+  progressBar.value = (itemsLoaded / itemsTotal) * 100;
+  console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
 
-THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-    console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+const progressBarContainer = document.querySelector('.progress-bar-container');
+THREE.DefaultLoadingManager.onLoad = function ( ) {
+  // progressBarContainer.style.display = 'none';
+  console.log( 'Loading Complete!');
 };
 
 THREE.DefaultLoadingManager.onError = function ( url ) {
@@ -137,13 +143,13 @@ const atmosphere = new THREE.Mesh(
 
 atmosphere.scale.set(1.1, 1.1, 1.1)
 
-camera.position.z = 15
+camera.position.z = -140
 
 const starVertices = []
-for (let i = 0; i < 10000; i++) {
+for (let i = 0; i < 20000; i++) {
     const x = (Math.random() - 0.5) * 2000
     const y = (Math.random() - 0.5) * 2000
-    const z = -Math.random() * 2000
+    const z = (Math.random() - 0.5) * 2000
     starVertices.push(x, y, z)
 }
 
@@ -182,18 +188,29 @@ const mouse = {
 function animate() {
     requestAnimationFrame(animate)
     renderer.render(scene, camera)
-  gsap.to(group.rotation,{
-      x: -mouse.y * 0.3,
-      y: mouse.x * 0.5,
-      duration: 1.5
-  })
 }
 
 animate()
 
-
 addEventListener('mousemove', () => {
     mouse.x = (event.clientX / innerWidth) * 2 - 1
     mouse.y = -(event.clientY / innerHeight) * 2 + 1
+  gsap.to(group.rotation,{
+    x: -mouse.y * 0.3,
+    y: mouse.x * 0.5,
+    duration: 1.5
+  })
+
    // console.log(mouse);
 })
+
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
