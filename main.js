@@ -1,3 +1,4 @@
+import './style.css';
 import gsap from 'gsap';
 import * as THREE from 'three'
 import vertexShader from './shaders/vertex.glsl'
@@ -10,13 +11,13 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 console.log(vertexShader);
 
+const mainContent = document.getElementById('main-content');
+
 
 // Loading Manager
 THREE.DefaultLoadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
     console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
-
-
 
 const progressBar = document.getElementById('progress-bar');
 THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
@@ -26,7 +27,8 @@ THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal
 
 const progressBarContainer = document.querySelector('.progress-bar-container');
 THREE.DefaultLoadingManager.onLoad = function ( ) {
-  // progressBarContainer.style.display = 'none';
+  progressBarContainer.style.display = 'none';
+  mainContent.style.display = 'grid';
   console.log( 'Loading Complete!');
 };
 
@@ -109,7 +111,8 @@ pointMesh.position.set(pos.x, pos.y, pos.z)
 
 const renderer = new THREE.WebGLRenderer(
     {
-        antialias: true
+        antialias: true,
+        canvas: document.querySelector('#bg')
     }
 )
 renderer.setSize(innerWidth, innerHeight)
