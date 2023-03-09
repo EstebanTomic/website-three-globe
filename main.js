@@ -190,6 +190,7 @@ const mouse = {
 
 function animate() {
     requestAnimationFrame(animate)
+    group.rotation.y += 0.001;
     renderer.render(scene, camera)
 }
 
