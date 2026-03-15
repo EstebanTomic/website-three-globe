@@ -2,6 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,25 +16,24 @@
       <label for="progress-bar">Loading...</label>
       <progress id="progress-bar" value="0" max="100"></progress>
     </div>
-    <main id="main-content" style="display: none;">
-      <header>
+    
+    <!-- Layout fullscreen: header (top), canvas (center), quote (bottom) -->
+    <div id="main-content" class="fullscreen-layout" style="display: none;">
+      <!-- Header top -->
+      <header class="header-top">
         <h1>Esteban Tomic</h1>
         <p class="tagline">Senior Software Engineer</p>
         <p><a href="mailto:e.tomic@gmail.com" class="cta">Contáctame</a></p>
       </header>
 
-      <section class="hero">
+      <!-- Quote bottom -->
+      <section class="quote-bottom">
         <blockquote>
           <p>One man is equivalent to all Creation. One man is a World in miniature.</p>
         </blockquote>
       </section>
-
-      <section class="contact">
-        <h2>Contacto</h2>
-        <p>Correo: <a href="mailto:e.tomic@gmail.com">e.tomic@gmail.com</a></p>
-      </section>
-
-    </main>
+    </div>
+    
     <script type="module" src="/main.js"></script>
   </body>
 </html>

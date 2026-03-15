@@ -154,14 +154,14 @@ atmosphere.scale.set(1.1, 1.1, 1.1)
 const isMobile = /Mobi|Android/i.test(navigator.userAgent)
 if (isMobile) {
     // cámara un poco más cerca en móviles
-    camera.position.z = -120
+    camera.position.z = -160
 } else {
     camera.position.z = -140
 }
 
 // generar estrellas: menos cantidad en mobile para mejorar rendimiento
 const starVertices = []
-const starCount = isMobile ? 5000 : 20000
+const starCount = isMobile ? 10000 : 20000
 for (let i = 0; i < starCount; i++) {
     const x = (Math.random() - 0.5) * 2000
     const y = (Math.random() - 0.5) * 2000
