@@ -119,7 +119,8 @@ const renderer = new THREE.WebGLRenderer(
     }
 )
 renderer.setSize(innerWidth, innerHeight)
-renderer.setPixelRatio(window.devicePixelRatio)
+// mejorar performance en dispositivos móviles limitando pixel ratio
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
 document.body.appendChild(renderer.domElement)
 
 // Sphere
@@ -130,7 +131,7 @@ const sphere = new THREE.Mesh(
         fragmentShader,
         uniforms:{
             globeTexture: {
-                value: new THREE.TextureLoader().load('./img/globe4k.jpg')
+                value: new THREE.TextureLoader().load('/img/globe4k.jpg')
             }
         }
     })
@@ -149,10 +150,19 @@ const atmosphere = new THREE.Mesh(
 
 atmosphere.scale.set(1.1, 1.1, 1.1)
 
-camera.position.z = -140
+// Detectar mobile y ajustar parámetros
+const isMobile = /Mobi|Android/i.test(navigator.userAgent)
+if (isMobile) {
+    // cámara un poco más cerca en móviles
+    camera.position.z = -160
+} else {
+    camera.position.z = -140
+}
 
+// generar estrellas: menos cantidad en mobile para mejorar rendimiento
 const starVertices = []
-for (let i = 0; i < 20000; i++) {
+const starCount = isMobile ? 10000 : 20000
+for (let i = 0; i < starCount; i++) {
     const x = (Math.random() - 0.5) * 2000
     const y = (Math.random() - 0.5) * 2000
     const z = (Math.random() - 0.5) * 2000
@@ -183,6 +193,14 @@ const controls = new OrbitControls( camera, renderer.domElement );
 // controls.target.set( 0, 10, 0 );
 controls.minDistance = 2.0;
 controls.maxDistance = 2000.0;
+// ajustes para mobile: suavizar o limitar algunos movimientos
+if (isMobile) {
+    controls.enablePan = false
+    controls.rotateSpeed = 0.6
+    controls.zoomSpeed = 0.8
+} else {
+    controls.rotateSpeed = 1.0
+}
 controls.update();
 
 
@@ -199,16 +217,35 @@ function animate() {
 
 animate()
 
-addEventListener('mousemove', () => {
-    mouse.x = (event.clientX / innerWidth) * 2 - 1
-    mouse.y = -(event.clientY / innerHeight) * 2 + 1
-  gsap.to(group.rotation,{
-    x: -mouse.y * 0.3,
-    y: mouse.x * 0.5,
-    duration: 1.5
-  })
+addEventListener('mousemove', (event) => {
+        if (isMobile) return
+        mouse.x = (event.clientX / innerWidth) * 2 - 1
+        mouse.y = -(event.clientY / innerHeight) * 2 + 1
+    gsap.to(group.rotation,{
+        x: -mouse.y * 0.3,
+        y: mouse.x * 0.5,
+        duration: 1.5
+    })
+})
 
-   // console.log(mouse);
+// touch controls: permitir pequeñas rotaciones con swipe
+let lastTouch = null
+addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) lastTouch = {x: e.touches[0].clientX, y: e.touches[0].clientY}
+})
+addEventListener('touchmove', (e) => {
+    if (!isMobile) return
+    if (e.touches && e.touches[0] && lastTouch) {
+        const dx = e.touches[0].clientX - lastTouch.x
+        const dy = e.touches[0].clientY - lastTouch.y
+        // rotar el grupo suavemente según el swipe
+        gsap.to(group.rotation, { 
+            x: group.rotation.x + dy * 0.002,
+            y: group.rotation.y + dx * 0.002,
+            duration: 0.5
+        })
+        lastTouch = {x: e.touches[0].clientX, y: e.touches[0].clientY}
+    }
 })
 
 window.addEventListener( 'resize', onWindowResize, false );
