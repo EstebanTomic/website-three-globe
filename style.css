@@ -7,6 +7,9 @@ canvas {
 :root {
   --spacing: 350px;
   --dark-bg: rgba(15, 15, 15, 0.95);
+  --accent: #38b6ff;
+  --cta-bg: #ff6b6b;
+  --cta-color: #fff;
 
   font-family: brandon-grotesque, sans-serif;
   font-weight: 400;
@@ -49,13 +52,38 @@ header {
   margin-bottom: var(--spacing);
 }
 
+.tagline{
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.cta{
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--cta-bg);
+  color: var(--cta-color);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
 section {
   grid-column: 2 / 8;
   padding: 1rem;
-  background: var(--dark-bg);
+  /* mantener el fondo transparente para que el canvas sea visible */
+  background: transparent;
   font-size: 1.25rem;
   line-height: 1.5;
   margin-bottom: var(--spacing);
+  /* ligera sombra para mejorar contraste sobre el fondo del canvas */
+  text-shadow: 0 6px 18px rgba(0,0,0,0.65);
+}
+
+/* secciones específicas mantienen transparencia */
+.hero, .services, .contact {
+  background: transparent;
 }
 
 blockquote {
@@ -95,4 +123,64 @@ blockquote p {
   width: 30%;
   margin-top: 0.5%;
   height: 2%;
+}
+
+/* Responsive: mobile adjustments */
+@media (max-width: 900px) {
+  :root {
+    --spacing: 120px;
+  }
+
+  main {
+    padding: 80px 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    grid-column: 1 / -1;
+    font-size: 1.6rem;
+    padding: 1rem;
+    margin-bottom: calc(var(--spacing) / 2);
+  }
+
+  section {
+    grid-column: 1 / -1;
+    margin-bottom: calc(var(--spacing) / 2);
+    font-size: 1rem;
+  }
+
+  blockquote p {
+    font-size: 2rem;
+  }
+
+  .left {
+    grid-column: 1 / -1;
+  }
+
+  .progress-bar-container {
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  #progress-bar {
+    width: 80%;
+    height: 4%;
+  }
+
+  canvas {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+}
+
+/* Small devices */
+@media (max-width: 480px) {
+  :root {
+    --spacing: 80px;
+  }
+
+  header { font-size: 1.25rem; }
+  blockquote p { font-size: 1.4rem; }
 }
