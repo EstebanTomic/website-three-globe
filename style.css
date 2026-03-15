@@ -70,7 +70,10 @@ main::after {
 /* Header at top */
 .header-top,
 header {
-  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -80,14 +83,16 @@ header {
   background: transparent;
   text-align: center;
   z-index: 10;
-  margin: 0 auto;
   flex-shrink: 0;
 }
 
 /* Quote at bottom */
 .quote-bottom,
 section {
-  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
   max-width: 1000px;
   display: flex;
   flex-direction: column;
@@ -97,7 +102,7 @@ section {
   background: transparent;
   text-align: center;
   z-index: 10;
-  margin: auto auto 0 auto;
+  margin-top: auto;
   flex-shrink: 0;
 }
 
