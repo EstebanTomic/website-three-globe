@@ -238,10 +238,10 @@ addEventListener('touchmove', (e) => {
     if (e.touches && e.touches[0] && lastTouch) {
         const dx = e.touches[0].clientX - lastTouch.x
         const dy = e.touches[0].clientY - lastTouch.y
-        // rotar el grupo suavemente según el swipe
+        // rotar el grupo suavemente según el swipe - aumentar multiplicador Y para mayor rotación
         gsap.to(group.rotation, { 
-            x: group.rotation.x + dy * 0.002,
-            y: group.rotation.y + dx * 0.002,
+            x: group.rotation.x + dy * 0.003,
+            y: group.rotation.y + dx * 0.004,
             duration: 0.5
         })
         lastTouch = {x: e.touches[0].clientX, y: e.touches[0].clientY}
