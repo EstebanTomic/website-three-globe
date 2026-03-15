@@ -12,7 +12,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 console.log(vertexShader);
 
 const mainContent = document.getElementById('main-content');
-
+const bg = document.getElementById('bg');
+mainContent.style.display = 'none';
+bg.style.display = 'none';
 
 // Loading Manager
 THREE.DefaultLoadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
@@ -29,6 +31,7 @@ const progressBarContainer = document.querySelector('.progress-bar-container');
 THREE.DefaultLoadingManager.onLoad = function ( ) {
   progressBarContainer.style.display = 'none';
   mainContent.style.display = 'grid';
+  bg.style.display = 'grid';
   console.log( 'Loading Complete!');
 };
 
