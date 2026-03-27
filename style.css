@@ -71,7 +71,7 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: clamp(2rem, 5vh, 4rem) 0;
+  padding: clamp(2rem, 5vh, 4rem) 0 clamp(4rem, 12vh, 8rem);
   margin: 0;
 }
 
@@ -337,6 +337,17 @@ blockquote p {
   text-align: center;
 }
 
+/* Experience block overrides: left-aligned */
+#exp-block {
+  align-items: flex-start;
+}
+
+#exp-block h3 {
+  width: 100%;
+  text-align: left;
+  padding-left: calc(44px + 1rem);
+}
+
 /* Skills centered */
 .skills-group {
   width: 100%;
@@ -460,11 +471,14 @@ blockquote p {
   font-size: 0.95rem;
   margin: 0 0 0.2rem;
   color: rgba(255,255,255,0.92);
+  text-align: left;
 }
 
 .tl-company {
   font-size: 0.8rem;
   color: var(--accent);
+  text-align: left;
+  display: block;
 }
 
 .tl-meta {
