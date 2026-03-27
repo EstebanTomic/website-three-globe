@@ -16,24 +16,164 @@
       <label for="progress-bar">Loading...</label>
       <progress id="progress-bar" value="0" max="100"></progress>
     </div>
-    
-    <!-- Layout fullscreen: header (top), canvas (center), quote (bottom) -->
+
+    <!-- Hero: fixed overlay (name + quote) -->
     <div id="main-content" class="fullscreen-layout" style="display: none;">
-      <!-- Header top -->
       <header class="header-top">
         <h1>Esteban Tomic</h1>
         <p class="tagline">Senior Software Engineer</p>
         <p><a href="mailto:e.tomic@gmail.com" class="cta">Contáctame</a></p>
       </header>
-
-      <!-- Quote bottom -->
       <section class="quote-bottom">
         <blockquote>
           <p>One man is equivalent to all creation. One man is a World in miniature.</p>
         </blockquote>
       </section>
     </div>
-    
+
+    <!-- Scrollable content -->
+    <div id="page-content">
+      <!-- Hero spacer: occupies first 100vh so profile appears below -->
+      <div id="hero-spacer"></div>
+
+      <!-- Profile section -->
+      <section id="profile">
+        <div class="profile-inner">
+
+          <!-- About -->
+          <div class="profile-about reveal">
+            <div class="profile-avatar">ET</div>
+            <div class="profile-bio">
+              <h2>Esteban Felipe Tomic Ampuero</h2>
+              <p class="profile-title">Senior Backend Developer</p>
+              <p class="profile-desc">
+                Autodidacta y proactivo, con más de 13 años de experiencia en desarrollo de software, liderazgo técnico y arquitectura cloud. Especializado en ecosistemas Node.js/NestJS, microservicios e infraestructura AWS. Disponibilidad para viajar dentro y fuera de Chile.
+              </p>
+              <div class="profile-links">
+                <a href="tel:+56988950304" class="profile-link">📞 +56 9 88 95 03 04</a>
+                <a href="mailto:e.tomic@gmail.com" class="profile-link">✉ e.tomic@gmail.com</a>
+                <a href="https://linkedin.com/in/etomica" target="_blank" class="profile-link">in linkedin.com/in/etomica</a>
+                <span class="profile-link">📍 Santiago, Chile</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="profile-section-block reveal">
+            <h3>Habilidades Técnicas</h3>
+            <div class="skills-group">
+              <p class="skills-level">Expert</p>
+              <div class="skills-tags">
+                <span>NodeJS</span><span>NestJS</span><span>Express</span><span>AWS</span><span>Git</span><span>PostgreSQL</span><span>MongoDB</span><span>Unix</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <p class="skills-level">Proficient</p>
+              <div class="skills-tags">
+                <span>Docker</span><span>Terraform</span><span>Java</span><span>Spring Boot</span><span>Quarkus</span><span>Angular</span><span>Jest</span><span>MySQL</span>
+              </div>
+            </div>
+            <div class="skills-group">
+              <p class="skills-level">Working Knowledge</p>
+              <div class="skills-tags">
+                <span>Kibana</span><span>Jenkins</span><span>Gradle</span><span>Flyway</span><span>C#</span><span>Delphi</span><span>SQLServer</span><span>Kiuwan</span><span>Fortify</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="profile-section-block reveal">
+            <h3>Experiencia Profesional</h3>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Senior Backend Developer</span>
+                <span class="exp-date">Abr 2022 – Actualidad</span>
+              </div>
+              <span class="exp-company">Falabella Financiero</span>
+              <p>Desarrollo senior en la célula onboarding de Banco Falabella Perú y Colombia, apoyando la migración de NodeJS a NestJS con estrategia monorepo.</p>
+            </div>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Líder Técnico</span>
+                <span class="exp-date">Sep 2021 – Feb 2022</span>
+              </div>
+              <span class="exp-company">SMU</span>
+              <p>Liderazgo de la célula de desarrollo de la pasarela de pago para ecommerce Unimarc, con NestJS y metodologías ágiles.</p>
+            </div>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Líder Técnico</span>
+                <span class="exp-date">May 2020 – Sep 2021</span>
+              </div>
+              <span class="exp-company">Transbank</span>
+              <p>Liderazgo del laboratorio de innovación generando MVPs de pasarela de pagos y transferencias internacionales, con infraestructura como código, CI/CD y microservicios.</p>
+            </div>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Ingeniero de Software</span>
+                <span class="exp-date">May 2018 – Abr 2020</span>
+              </div>
+              <span class="exp-company">KDU Ingeniería</span>
+              <p>Creación y liderazgo del área de soporte con administración de infraestructura cloud AWS en modalidad 24x7.</p>
+            </div>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Líder de Operaciones TI</span>
+                <span class="exp-date">Jun 2016 – Feb 2018</span>
+              </div>
+              <span class="exp-company">Edenred Chile</span>
+              <p>Liderazgo del área de operaciones, incidencias y soporte 24x7 para todos los sistemas de la empresa, con gestión de proveedores.</p>
+            </div>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Analista de Sistemas 24x7</span>
+                <span class="exp-date">Nov 2014 – May 2016</span>
+              </div>
+              <span class="exp-company">CMR Falabella</span>
+              <p>Desarrollos correctivos y soporte 24x7 para sistemas Web CMR, Kioskos y Botones de pago (standard, plus, SII, TGR, Servipag).</p>
+            </div>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Analista Programador</span>
+                <span class="exp-date">Jul 2011 – Sep 2014</span>
+              </div>
+              <span class="exp-company">Everis Chile</span>
+              <p>Desarrollo y soporte 24x7 del sistema de gestión para portabilidad numérica de números móviles y fijos.</p>
+            </div>
+          </div>
+
+          <!-- Education & Certifications -->
+          <div class="profile-section-block reveal">
+            <h3>Educación y Capacitación</h3>
+            <div class="exp-item">
+              <div class="exp-header">
+                <span class="exp-role">Licenciatura en Ciencias de la Computación</span>
+                <span class="exp-date">2004 – 2011</span>
+              </div>
+              <span class="exp-company">Universidad de Santiago de Chile</span>
+            </div>
+            <div class="skills-group" style="margin-top: 0.5rem;">
+              <p class="skills-level">Certificaciones</p>
+              <div class="skills-tags">
+                <span>AWS Cloud Practitioner 2022</span>
+                <span>Diplomado Arquitectura Cloud 2021</span>
+                <span>Curso SysOp AWS 2019</span>
+                <span>Desarrollo Seguro OWASP 2015</span>
+              </div>
+            </div>
+            <div class="skills-group" style="margin-top: 1rem;">
+              <p class="skills-level">Idiomas</p>
+              <div class="skills-tags">
+                <span>Español — Nativo</span>
+                <span>Inglés — Intermedio</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>
