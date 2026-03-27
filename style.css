@@ -5,13 +5,27 @@ canvas {
   z-index: 1;
 }
 
-/* Evitar scroll y usar box-sizing global */
+/* Makes page 200vh tall so parallax scroll works */
+.scroll-spacer {
+  height: 200vh;
+  pointer-events: none;
+}
+
+/* Box-sizing global */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 *, *::before, *::after { 
@@ -40,39 +54,30 @@ html, body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* Fullscreen layout: 3 zones (header top, canvas center, quote bottom) */
+/* Fullscreen layout: textos centrados verticalmente */
 #main-content.fullscreen-layout,
 main {
   color: ghostwhite;
   z-index: 99;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
-  
+
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  padding: 0;
+  padding: clamp(2rem, 5vh, 4rem) 0;
   margin: 0;
-}
-
-/* Spacer para separar header de quote */
-#main-content.fullscreen-layout::after,
-main::after {
-  content: '';
-  flex: 1;
 }
 
 /* Header at top */
 .header-top,
 header {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   width: 90%;
   max-width: 1000px;
   display: flex;
@@ -86,12 +91,9 @@ header {
   flex-shrink: 0;
 }
 
-/* Quote at bottom */
+/* Quote */
 .quote-bottom,
 section {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   width: 90%;
   max-width: 1000px;
   display: flex;
@@ -102,7 +104,6 @@ section {
   background: transparent;
   text-align: center;
   z-index: 10;
-  margin-top: auto;
   flex-shrink: 0;
 }
 
@@ -187,7 +188,331 @@ blockquote p {
   height: 2%;
 }
 
-/* Responsive: tablet adjustments */
+/* ─── Page content wrapper ─────────────────────────────────────── */
+#page-content {
+  position: relative;
+  z-index: 50;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#hero-spacer {
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* ─── Profile section ───────────────────────────────────────────── */
+#profile {
+  min-height: 100vh;
+  padding: 4rem 1rem 6rem;
+  background: rgba(10, 10, 18, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.profile-inner {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+/* Reveal animation: sections start hidden, fade+slide up on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* About block */
+.profile-about {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38b6ff 0%, #1a6fa8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Poppins, sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #fff;
+  box-shadow: 0 0 30px rgba(56, 182, 255, 0.25);
+}
+
+.profile-bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profile-bio h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 0.25rem;
+}
+
+.profile-title {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.profile-desc {
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.profile-desc--en {
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.profile-link {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.profile-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Section blocks (Skills, Experience) */
+.profile-section-block {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-section-block h3 {
+  font-family: Poppins, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/* Skills centered */
+.skills-group {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Skills */
+.skills-group {
+  margin-bottom: 1rem;
+}
+
+.skills-level {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.skills-tags span {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* ─── Timeline ──────────────────────────────────────────────────── */
+.timeline {
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+  padding-left: 0;
+}
+
+/* Vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 44px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: rgba(56, 182, 255, 0.25);
+}
+
+.tl-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+
+/* Left column: year + dot */
+.tl-left {
+  flex-shrink: 0;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  position: relative;
+}
+
+.tl-year {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+/* Dot on the line */
+.tl-left::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(56, 182, 255, 0.6);
+  flex-shrink: 0;
+}
+
+/* Card */
+.tl-card {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.tl-card:hover {
+  border-color: rgba(56, 182, 255, 0.35);
+}
+
+.tl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.tl-role {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 0.2rem;
+  color: rgba(255,255,255,0.92);
+}
+
+.tl-company {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.tl-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.tl-date {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+}
+
+.tl-arrow {
+  font-size: 0.65rem;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.tl-card.open .tl-arrow {
+  transform: rotate(180deg);
+}
+
+/* Collapsible body */
+.tl-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 1rem;
+}
+
+.tl-card.open .tl-body {
+  max-height: 300px;
+  padding: 0 1rem 1rem;
+}
+
+.tl-body p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ─── Responsive: tablet adjustments */
 @media (max-width: 900px) {
   .header-top,
   header {
@@ -219,5 +544,20 @@ blockquote p {
   .quote-bottom,
   section {
     padding: 0.5rem 0.75rem;
+  }
+
+  .profile-about {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-links {
+    justify-content: center;
+  }
+
+  .exp-header {
+    flex-direction: column;
+    gap: 0.1rem;
   }
 }

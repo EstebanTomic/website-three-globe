@@ -30,8 +30,8 @@ THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal
 const progressBarContainer = document.querySelector('.progress-bar-container');
 THREE.DefaultLoadingManager.onLoad = function ( ) {
   progressBarContainer.style.display = 'none';
-  mainContent.style.display = 'grid';
-  bg.style.display = 'grid';
+  mainContent.style.display = 'flex';
+  bg.style.display = 'block';
   console.log( 'Loading Complete!');
 };
 
@@ -160,13 +160,17 @@ if (isMobile) {
 }
 
 // generar estrellas: menos cantidad en mobile para mejorar rendimiento
+// Se descartan las que quedan a menos de 300 unidades del planeta
 const starVertices = []
 const starCount = isMobile ? 10000 : 20000
-for (let i = 0; i < starCount; i++) {
+const MIN_STAR_DIST = 300
+while (starVertices.length < starCount * 3) {
     const x = (Math.random() - 0.5) * 2000
     const y = (Math.random() - 0.5) * 2000
     const z = (Math.random() - 0.5) * 2000
-    starVertices.push(x, y, z)
+    if (x*x + y*y + z*z > MIN_STAR_DIST * MIN_STAR_DIST) {
+        starVertices.push(x, y, z)
+    }
 }
 
 const starGeometry = new THREE.BufferGeometry()
@@ -247,6 +251,47 @@ addEventListener('touchmove', (e) => {
         lastTouch = {x: e.touches[0].clientX, y: e.touches[0].clientY}
     }
 })
+
+// Scroll: zoom-out del planeta + fade del hero
+// El zoom ocurre en los primeros 100vh de scroll
+const CAMERA_START_Z = isMobile ? -160 : -140
+const CAMERA_END_Z = -600
+
+window.addEventListener('scroll', () => {
+    const progress = Math.min(window.scrollY / window.innerHeight, 1)
+
+    // Zoom out rápido
+    gsap.to(camera.position, {
+        z: CAMERA_START_Z + (CAMERA_END_Z - CAMERA_START_Z) * progress,
+        duration: 0.3,
+        ease: 'power2.out'
+    })
+
+    // Fade del hero (desaparece en el primer 50% del scroll)
+    const heroOpacity = Math.max(1 - progress * 2, 0)
+    mainContent.style.opacity = heroOpacity
+    mainContent.style.pointerEvents = heroOpacity === 0 ? 'none' : 'auto'
+})
+
+// Timeline accordion
+document.querySelectorAll('[data-toggle]').forEach(header => {
+    header.addEventListener('click', () => {
+        const card = header.closest('.tl-card')
+        card.classList.toggle('open')
+    })
+})
+
+// Reveal sections on scroll via IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+        }
+    })
+}, { threshold: 0.15 })
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 
 window.addEventListener( 'resize', onWindowResize, false );
 
