@@ -340,13 +340,10 @@ blockquote p {
   text-align: center;
 }
 
-/* Experience block: left-aligned */
-#exp-block { align-items: flex-start; }
-
+/* Experience block: centered title, timeline centered */
 #exp-block h3 {
   width: 100%;
-  text-align: left;
-  padding-left: calc(44px + 1rem);
+  text-align: center;
 }
 
 /* Skills */
