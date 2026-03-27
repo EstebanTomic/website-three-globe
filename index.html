@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,12 +17,18 @@
       <progress id="progress-bar" value="0" max="100"></progress>
     </div>
 
+    <!-- Language switcher -->
+    <div id="lang-switcher">
+      <button class="lang-btn active" data-lang="es">🇨🇱 ES</button>
+      <button class="lang-btn" data-lang="en">🇺🇸 EN</button>
+    </div>
+
     <!-- Hero: fixed overlay (name + quote) -->
     <div id="main-content" class="fullscreen-layout" style="display: none;">
       <header class="header-top">
         <h1>Esteban Tomic</h1>
         <p class="tagline">Senior Software Engineer</p>
-        <p><a href="mailto:e.tomic@gmail.com" class="cta">Contáctame</a></p>
+        <p><a href="mailto:e.tomic@gmail.com" class="cta" data-es="Contáctame" data-en="Contact Me">Contáctame</a></p>
       </header>
       <section class="quote-bottom">
         <blockquote>
@@ -33,10 +39,8 @@
 
     <!-- Scrollable content -->
     <div id="page-content">
-      <!-- Hero spacer: occupies first 100vh so profile appears below -->
       <div id="hero-spacer"></div>
 
-      <!-- Profile section -->
       <section id="profile" spellcheck="false">
         <div class="profile-inner">
 
@@ -46,10 +50,10 @@
             <div class="profile-bio">
               <h2>Esteban Felipe Tomic Ampuero</h2>
               <p class="profile-title">Senior Backend Developer</p>
-              <p class="profile-desc">
+              <p class="profile-desc lang-only-es">
                 Autodidacta y proactivo, con más de 13 años de experiencia en desarrollo de software, liderazgo técnico y arquitectura cloud. Especializado en ecosistemas Node.js/NestJS, microservicios e infraestructura AWS. Disponibilidad para viajar dentro y fuera de Chile.
               </p>
-              <p class="profile-desc profile-desc--en">
+              <p class="profile-desc lang-only-en" style="display:none">
                 Self-taught and proactive, with over 13 years of experience in software development, technical leadership and cloud architecture. Specialized in Node.js/NestJS ecosystems, microservices and AWS infrastructure. Available to travel within and outside Chile.
               </p>
               <div class="profile-links">
@@ -64,7 +68,7 @@
 
           <!-- Skills -->
           <div class="profile-section-block reveal">
-            <h3>Habilidades Técnicas</h3>
+            <h3 data-es="Habilidades Técnicas" data-en="Technical Skills">Habilidades Técnicas</h3>
             <div class="skills-group">
               <p class="skills-level">Expert</p>
               <div class="skills-tags">
@@ -87,18 +91,27 @@
 
           <!-- Experience -->
           <div class="profile-section-block reveal" id="exp-block">
-            <h3>Experiencia Profesional</h3>
+            <h3 data-es="Experiencia Profesional" data-en="Professional Experience">Experiencia Profesional</h3>
             <div class="timeline">
 
               <div class="tl-item">
                 <div class="tl-left"><span class="tl-year">2022</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Senior Backend Developer</p><span class="tl-company">Falabella Financiero</span></div>
-                    <div class="tl-meta"><span class="tl-date">Abr 2022 – Actualidad</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Senior Backend Developer" data-en="Senior Backend Developer">Senior Backend Developer</p>
+                      <span class="tl-company">Falabella Financiero</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="Abr 2022 – Actualidad" data-en="Apr 2022 – Present">Abr 2022 – Actualidad</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Desarrollo senior en la célula onboarding de Banco Falabella Perú y Colombia, apoyando la migración de NodeJS a NestJS con estrategia monorepo.</p>
+                    <p data-es="Desarrollo senior en la célula onboarding de Banco Falabella Perú y Colombia, apoyando la migración de NodeJS a NestJS con estrategia monorepo."
+                       data-en="Senior development in the onboarding squad of Banco Falabella Peru and Colombia, supporting the migration from NodeJS to NestJS using a monorepo strategy.">
+                      Desarrollo senior en la célula onboarding de Banco Falabella Perú y Colombia, apoyando la migración de NodeJS a NestJS con estrategia monorepo.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -107,11 +120,20 @@
                 <div class="tl-left"><span class="tl-year">2021</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Líder Técnico</p><span class="tl-company">SMU</span></div>
-                    <div class="tl-meta"><span class="tl-date">Sep 2021 – Feb 2022</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Líder Técnico" data-en="Technical Lead">Líder Técnico</p>
+                      <span class="tl-company">SMU</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="Sep 2021 – Feb 2022" data-en="Sep 2021 – Feb 2022">Sep 2021 – Feb 2022</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Liderazgo de la célula de desarrollo de la pasarela de pago para ecommerce Unimarc, con NestJS y metodologías ágiles.</p>
+                    <p data-es="Liderazgo de la célula de desarrollo de la pasarela de pago para ecommerce Unimarc, con NestJS y metodologías ágiles."
+                       data-en="Led the development squad for Unimarc's ecommerce payment gateway, built with NestJS and agile methodologies.">
+                      Liderazgo de la célula de desarrollo de la pasarela de pago para ecommerce Unimarc, con NestJS y metodologías ágiles.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -120,11 +142,20 @@
                 <div class="tl-left"><span class="tl-year">2020</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Líder Técnico</p><span class="tl-company">Transbank</span></div>
-                    <div class="tl-meta"><span class="tl-date">May 2020 – Sep 2021</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Líder Técnico" data-en="Technical Lead">Líder Técnico</p>
+                      <span class="tl-company">Transbank</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="May 2020 – Sep 2021" data-en="May 2020 – Sep 2021">May 2020 – Sep 2021</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Liderazgo del laboratorio de innovación generando MVPs de pasarela de pagos y transferencias internacionales, con infraestructura como código, CI/CD y microservicios.</p>
+                    <p data-es="Liderazgo del laboratorio de innovación generando MVPs de pasarela de pagos y transferencias internacionales, con infraestructura como código, CI/CD y microservicios."
+                       data-en="Led the innovation lab generating payment gateway and international transfer MVPs, with infrastructure as code, CI/CD and microservices.">
+                      Liderazgo del laboratorio de innovación generando MVPs de pasarela de pagos y transferencias internacionales, con infraestructura como código, CI/CD y microservicios.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -133,11 +164,20 @@
                 <div class="tl-left"><span class="tl-year">2018</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Ingeniero de Software</p><span class="tl-company">KDU Ingeniería</span></div>
-                    <div class="tl-meta"><span class="tl-date">May 2018 – Abr 2020</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Ingeniero de Software" data-en="Software Engineer">Ingeniero de Software</p>
+                      <span class="tl-company">KDU Ingeniería</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="May 2018 – Abr 2020" data-en="May 2018 – Apr 2020">May 2018 – Abr 2020</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Creación y liderazgo del área de soporte con administración de infraestructura cloud AWS en modalidad 24x7.</p>
+                    <p data-es="Creación y liderazgo del área de soporte con administración de infraestructura cloud AWS en modalidad 24x7."
+                       data-en="Created and led the support area, managing AWS cloud infrastructure in 24x7 mode.">
+                      Creación y liderazgo del área de soporte con administración de infraestructura cloud AWS en modalidad 24x7.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -146,11 +186,20 @@
                 <div class="tl-left"><span class="tl-year">2016</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Líder de Operaciones TI</p><span class="tl-company">Edenred Chile</span></div>
-                    <div class="tl-meta"><span class="tl-date">Jun 2016 – Feb 2018</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Líder de Operaciones TI" data-en="IT Operations Lead">Líder de Operaciones TI</p>
+                      <span class="tl-company">Edenred Chile</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="Jun 2016 – Feb 2018" data-en="Jun 2016 – Feb 2018">Jun 2016 – Feb 2018</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Liderazgo del área de operaciones, incidencias y soporte 24x7 para todos los sistemas de la empresa, con gestión de proveedores.</p>
+                    <p data-es="Liderazgo del área de operaciones, incidencias y soporte 24x7 para todos los sistemas de la empresa, con gestión de proveedores."
+                       data-en="Led the operations, incidents and 24x7 support area for all company systems, managing vendor relationships.">
+                      Liderazgo del área de operaciones, incidencias y soporte 24x7 para todos los sistemas de la empresa, con gestión de proveedores.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -159,11 +208,20 @@
                 <div class="tl-left"><span class="tl-year">2014</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Analista de Sistemas 24x7</p><span class="tl-company">CMR Falabella</span></div>
-                    <div class="tl-meta"><span class="tl-date">Nov 2014 – May 2016</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Analista de Sistemas 24x7" data-en="Systems Analyst 24x7">Analista de Sistemas 24x7</p>
+                      <span class="tl-company">CMR Falabella</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="Nov 2014 – May 2016" data-en="Nov 2014 – May 2016">Nov 2014 – May 2016</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Desarrollos correctivos y soporte 24x7 para sistemas Web CMR, Kioskos y Botones de pago (standard, plus, SII, TGR, Servipag).</p>
+                    <p data-es="Desarrollos correctivos y soporte 24x7 para sistemas Web CMR, Kioskos y Botones de pago (standard, plus, SII, TGR, Servipag)."
+                       data-en="Corrective development and 24x7 support for CMR Web systems, Kiosks and Payment Buttons (standard, plus, SII, TGR, Servipag).">
+                      Desarrollos correctivos y soporte 24x7 para sistemas Web CMR, Kioskos y Botones de pago (standard, plus, SII, TGR, Servipag).
+                    </p>
                   </div>
                 </div>
               </div>
@@ -172,11 +230,20 @@
                 <div class="tl-left"><span class="tl-year">2011</span></div>
                 <div class="tl-card">
                   <div class="tl-header" data-toggle>
-                    <div><p class="tl-role">Analista Programador</p><span class="tl-company">Everis Chile</span></div>
-                    <div class="tl-meta"><span class="tl-date">Jul 2011 – Sep 2014</span><span class="tl-arrow">▼</span></div>
+                    <div>
+                      <p class="tl-role" data-es="Analista Programador" data-en="Programmer Analyst">Analista Programador</p>
+                      <span class="tl-company">Everis Chile</span>
+                    </div>
+                    <div class="tl-meta">
+                      <span class="tl-date" data-es="Jul 2011 – Sep 2014" data-en="Jul 2011 – Sep 2014">Jul 2011 – Sep 2014</span>
+                      <span class="tl-arrow">▼</span>
+                    </div>
                   </div>
                   <div class="tl-body">
-                    <p>Desarrollo y soporte 24x7 del sistema de gestión para portabilidad numérica de números móviles y fijos.</p>
+                    <p data-es="Desarrollo y soporte 24x7 del sistema de gestión para portabilidad numérica de números móviles y fijos."
+                       data-en="Development and 24x7 support for the number portability management system for mobile and fixed lines.">
+                      Desarrollo y soporte 24x7 del sistema de gestión para portabilidad numérica de números móviles y fijos.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -184,31 +251,30 @@
             </div><!-- /.timeline -->
           </div>
 
-
           <!-- Education & Certifications -->
           <div class="profile-section-block reveal">
-            <h3>Educación y Capacitación</h3>
+            <h3 data-es="Educación y Capacitación" data-en="Education & Certifications">Educación y Capacitación</h3>
             <div class="exp-item">
               <div class="exp-header">
-                <span class="exp-role">Licenciatura en Ciencias de la Computación</span>
+                <span class="exp-role" data-es="Licenciatura en Ciencias de la Computación" data-en="Bachelor's in Computer Science">Licenciatura en Ciencias de la Computación</span>
                 <span class="exp-date">2004 – 2011</span>
               </div>
               <span class="exp-company">Universidad de Santiago de Chile</span>
             </div>
             <div class="skills-group" style="margin-top: 0.5rem;">
-              <p class="skills-level">Certificaciones</p>
+              <p class="skills-level" data-es="Certificaciones" data-en="Certifications">Certificaciones</p>
               <div class="skills-tags">
                 <span>AWS Cloud Practitioner 2022</span>
-                <span>Diplomado Arquitectura Cloud 2021</span>
-                <span>Curso SysOp AWS 2019</span>
-                <span>Desarrollo Seguro OWASP 2015</span>
+                <span data-es="Diplomado Arquitectura Cloud 2021" data-en="Cloud Architecture Diploma 2021">Diplomado Arquitectura Cloud 2021</span>
+                <span data-es="Curso SysOp AWS 2019" data-en="AWS SysOp Course 2019">Curso SysOp AWS 2019</span>
+                <span data-es="Desarrollo Seguro OWASP 2015" data-en="OWASP Secure Development 2015">Desarrollo Seguro OWASP 2015</span>
               </div>
             </div>
             <div class="skills-group" style="margin-top: 1rem;">
-              <p class="skills-level">Idiomas</p>
+              <p class="skills-level" data-es="Idiomas" data-en="Languages">Idiomas</p>
               <div class="skills-tags">
-                <span>Español — Nativo</span>
-                <span>Inglés — Intermedio</span>
+                <span data-es="Español — Nativo" data-en="Spanish — Native">Español — Nativo</span>
+                <span data-es="Inglés — Intermedio" data-en="English — Intermediate">Inglés — Intermedio</span>
               </div>
             </div>
           </div>
