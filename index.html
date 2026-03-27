@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ETomic Website</title>
+    <title>Esteban Tomic | Senior Software Engineer</title>
   </head>
   <body>
     <canvas id="bg"></canvas>
@@ -49,10 +49,14 @@
               <p class="profile-desc">
                 Autodidacta y proactivo, con más de 13 años de experiencia en desarrollo de software, liderazgo técnico y arquitectura cloud. Especializado en ecosistemas Node.js/NestJS, microservicios e infraestructura AWS. Disponibilidad para viajar dentro y fuera de Chile.
               </p>
+              <p class="profile-desc profile-desc--en">
+                Self-taught and proactive, with over 13 years of experience in software development, technical leadership and cloud architecture. Specialized in Node.js/NestJS ecosystems, microservices and AWS infrastructure. Available to travel within and outside Chile.
+              </p>
               <div class="profile-links">
                 <a href="tel:+56988950304" class="profile-link">📞 +56 9 88 95 03 04</a>
                 <a href="mailto:e.tomic@gmail.com" class="profile-link">✉ e.tomic@gmail.com</a>
                 <a href="https://linkedin.com/in/etomica" target="_blank" class="profile-link">in linkedin.com/in/etomica</a>
+                <a href="https://github.com/EstebanTomic" target="_blank" class="profile-link">⌥ github.com/EstebanTomic</a>
                 <span class="profile-link">📍 Santiago, Chile</span>
               </div>
             </div>
@@ -82,65 +86,104 @@
           </div>
 
           <!-- Experience -->
-          <div class="profile-section-block reveal">
+          <div class="profile-section-block reveal" id="exp-block">
             <h3>Experiencia Profesional</h3>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Senior Backend Developer</span>
-                <span class="exp-date">Abr 2022 – Actualidad</span>
+            <div class="timeline">
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2022</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Senior Backend Developer</p><span class="tl-company">Falabella Financiero</span></div>
+                    <div class="tl-meta"><span class="tl-date">Abr 2022 – Actualidad</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Desarrollo senior en la célula onboarding de Banco Falabella Perú y Colombia, apoyando la migración de NodeJS a NestJS con estrategia monorepo.</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">Falabella Financiero</span>
-              <p>Desarrollo senior en la célula onboarding de Banco Falabella Perú y Colombia, apoyando la migración de NodeJS a NestJS con estrategia monorepo.</p>
-            </div>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Líder Técnico</span>
-                <span class="exp-date">Sep 2021 – Feb 2022</span>
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2021</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Líder Técnico</p><span class="tl-company">SMU</span></div>
+                    <div class="tl-meta"><span class="tl-date">Sep 2021 – Feb 2022</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Liderazgo de la célula de desarrollo de la pasarela de pago para ecommerce Unimarc, con NestJS y metodologías ágiles.</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">SMU</span>
-              <p>Liderazgo de la célula de desarrollo de la pasarela de pago para ecommerce Unimarc, con NestJS y metodologías ágiles.</p>
-            </div>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Líder Técnico</span>
-                <span class="exp-date">May 2020 – Sep 2021</span>
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2020</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Líder Técnico</p><span class="tl-company">Transbank</span></div>
+                    <div class="tl-meta"><span class="tl-date">May 2020 – Sep 2021</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Liderazgo del laboratorio de innovación generando MVPs de pasarela de pagos y transferencias internacionales, con infraestructura como código, CI/CD y microservicios.</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">Transbank</span>
-              <p>Liderazgo del laboratorio de innovación generando MVPs de pasarela de pagos y transferencias internacionales, con infraestructura como código, CI/CD y microservicios.</p>
-            </div>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Ingeniero de Software</span>
-                <span class="exp-date">May 2018 – Abr 2020</span>
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2018</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Ingeniero de Software</p><span class="tl-company">KDU Ingeniería</span></div>
+                    <div class="tl-meta"><span class="tl-date">May 2018 – Abr 2020</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Creación y liderazgo del área de soporte con administración de infraestructura cloud AWS en modalidad 24x7.</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">KDU Ingeniería</span>
-              <p>Creación y liderazgo del área de soporte con administración de infraestructura cloud AWS en modalidad 24x7.</p>
-            </div>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Líder de Operaciones TI</span>
-                <span class="exp-date">Jun 2016 – Feb 2018</span>
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2016</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Líder de Operaciones TI</p><span class="tl-company">Edenred Chile</span></div>
+                    <div class="tl-meta"><span class="tl-date">Jun 2016 – Feb 2018</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Liderazgo del área de operaciones, incidencias y soporte 24x7 para todos los sistemas de la empresa, con gestión de proveedores.</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">Edenred Chile</span>
-              <p>Liderazgo del área de operaciones, incidencias y soporte 24x7 para todos los sistemas de la empresa, con gestión de proveedores.</p>
-            </div>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Analista de Sistemas 24x7</span>
-                <span class="exp-date">Nov 2014 – May 2016</span>
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2014</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Analista de Sistemas 24x7</p><span class="tl-company">CMR Falabella</span></div>
+                    <div class="tl-meta"><span class="tl-date">Nov 2014 – May 2016</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Desarrollos correctivos y soporte 24x7 para sistemas Web CMR, Kioskos y Botones de pago (standard, plus, SII, TGR, Servipag).</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">CMR Falabella</span>
-              <p>Desarrollos correctivos y soporte 24x7 para sistemas Web CMR, Kioskos y Botones de pago (standard, plus, SII, TGR, Servipag).</p>
-            </div>
-            <div class="exp-item">
-              <div class="exp-header">
-                <span class="exp-role">Analista Programador</span>
-                <span class="exp-date">Jul 2011 – Sep 2014</span>
+
+              <div class="tl-item">
+                <div class="tl-left"><span class="tl-year">2011</span></div>
+                <div class="tl-card">
+                  <div class="tl-header" data-toggle>
+                    <div><p class="tl-role">Analista Programador</p><span class="tl-company">Everis Chile</span></div>
+                    <div class="tl-meta"><span class="tl-date">Jul 2011 – Sep 2014</span><span class="tl-arrow">▼</span></div>
+                  </div>
+                  <div class="tl-body">
+                    <p>Desarrollo y soporte 24x7 del sistema de gestión para portabilidad numérica de números móviles y fijos.</p>
+                  </div>
+                </div>
               </div>
-              <span class="exp-company">Everis Chile</span>
-              <p>Desarrollo y soporte 24x7 del sistema de gestión para portabilidad numérica de números móviles y fijos.</p>
-            </div>
+
+            </div><!-- /.timeline -->
           </div>
+
 
           <!-- Education & Certifications -->
           <div class="profile-section-block reveal">

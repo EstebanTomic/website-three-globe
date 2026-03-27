@@ -273,6 +273,14 @@ window.addEventListener('scroll', () => {
     mainContent.style.pointerEvents = heroOpacity === 0 ? 'none' : 'auto'
 })
 
+// Timeline accordion
+document.querySelectorAll('[data-toggle]').forEach(header => {
+    header.addEventListener('click', () => {
+        const card = header.closest('.tl-card')
+        card.classList.toggle('open')
+    })
+})
+
 // Reveal sections on scroll via IntersectionObserver
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

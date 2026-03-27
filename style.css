@@ -285,6 +285,14 @@ blockquote p {
   color: rgba(255,255,255,0.7);
   line-height: 1.7;
   font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.profile-desc--en {
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 0.75rem;
   margin-bottom: 1rem;
 }
 
@@ -367,46 +375,141 @@ blockquote p {
   font-size: 0.85rem;
 }
 
-/* Experience */
-.exp-item {
-  margin-bottom: 1.75rem;
+/* ─── Timeline ──────────────────────────────────────────────────── */
+.timeline {
   width: 100%;
-  max-width: 600px;
-  text-align: center;
-  box-sizing: border-box;
+  max-width: 700px;
+  position: relative;
+  padding-left: 0;
 }
 
-.exp-header {
+/* Vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 44px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: rgba(56, 182, 255, 0.25);
+}
+
+.tl-item {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
   gap: 1rem;
-  margin-bottom: 0.15rem;
-  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  align-items: flex-start;
 }
 
-.exp-role {
+/* Left column: year + dot */
+.tl-left {
+  flex-shrink: 0;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  position: relative;
+}
+
+.tl-year {
+  font-size: 0.7rem;
   font-weight: 700;
-  font-size: 1rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
 }
 
-.exp-date {
+/* Dot on the line */
+.tl-left::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(56, 182, 255, 0.6);
+  flex-shrink: 0;
+}
+
+/* Card */
+.tl-card {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.tl-card:hover {
+  border-color: rgba(56, 182, 255, 0.35);
+}
+
+.tl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.tl-role {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 0.2rem;
+  color: rgba(255,255,255,0.92);
+}
+
+.tl-company {
   font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.tl-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.tl-date {
+  font-size: 0.75rem;
   color: rgba(255,255,255,0.4);
   white-space: nowrap;
 }
 
-.exp-company {
-  font-size: 0.85rem;
+.tl-arrow {
+  font-size: 0.65rem;
   color: var(--accent);
+  transition: transform 0.3s ease;
   display: block;
-  margin-bottom: 0.4rem;
 }
 
-.exp-item p {
+.tl-card.open .tl-arrow {
+  transform: rotate(180deg);
+}
+
+/* Collapsible body */
+.tl-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 1rem;
+}
+
+.tl-card.open .tl-body {
+  max-height: 300px;
+  padding: 0 1rem 1rem;
+}
+
+.tl-body p {
   color: rgba(255,255,255,0.6);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 0;
 }
 
 /* ─── Responsive: tablet adjustments */
